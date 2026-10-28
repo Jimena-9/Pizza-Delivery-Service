@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Pizza Delivery Service">
+        <title>PizzaDelivery</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <!--This is used to display the header and navigation bar for the website.-->
+    <header class="site-header">
+        <a class="logo" href="index.html">PizzaDelivery</a>
+        <nav>
+            <ul>
+                <li id="home_link"><a href="index.html">Home</a></li>
+                <li id="order_link"><a href="order.html">Order</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--This is used to display the main content of the website.-->
+    <main>
+        <section>
+            <header>
+                <h1>Contact Us</h1>
+            </header>
+
+            <!--This is used to display the contact information.-->
+            <p>If you have any questions or feedback, please reach out to us using the form below.</p>
+            <section>
+                <!-- CHANGED: <div> → <ul>, because <li> must be inside a list -->
+                <ul class="card-list">
+                    <li>Phone: +44 29 2018 0123</li>
+                    <li>Email: hello@pizzadelivery.example</li>
+                    <li>Address: 12 Pizza Street, Cardiff, CF10 1AA</li>
+                </ul>
+            </section>
+
+            <!--This is used to display the form.-->
+            <!-- CHANGED: added id, removed action and method -->
+            <form id="contact-form">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <!-- CHANGED: removed "optional" (fields without "required" are already optional) -->
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4"></textarea><br><br>
+
+                <button type="submit">Submit</button>
+            </form>
+
+            <!-- NEW: success message, hidden until the form is sent -->
+            <p id="contact-success" class="contact-success" hidden></p>
+        </section>
+    </main> <!-- NEW: closes <main> -->
+
+    <!--This is used to display the footer of the website.-->
+    <footer class="footer">
+        <p>&copy; 2026 PizzaDelivery. All rights reserved.</p>
+    </footer>
+
+    <!-- Connects to the JavaScript file of THIS page -->
+    <script src="contact.js"></script>
+</body>
+</html>

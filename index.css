@@ -1,0 +1,83 @@
+:root {
+    --color-background-default: #FFFFFF;
+    --color-background-brand-primary: #2C2C2C;
+    --color-background-brand-secondary: #F8F7F5;
+    --color-primary: #EA6A12;
+    --color-secondary: #F8F7F5;
+    --color-text-primary: #1E1E1E;
+    --color-text-secondary: #757575;
+    --color-text-tertiary: #B3B3B3;
+
+    
+    --font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --h6: 14px;
+    --h5: 16px;
+    --h4: 24px;
+    --h3: 32px;
+    --h2: 48px;
+    --h1: 72px;
+}
+/* Navigation */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--color-background-default);
+    color: var(--color-secondary);
+}
+/* Homepage */
+.headline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: var(--font-family);
+    font-size: var(--h1);
+}
+/* Order Page */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Body */
+body {
+    margin:auto;
+    width: 80%;
+}
+
+section {
+    width: 66%;
+}
+
+aside {
+    width: 33%;
+}
+
+.first section {
+    float: left;
+}
+
+.first aside {
+    float: right;
+}
+
+.second section {
+    float: right;
+}
+
+.second aside {
+    float: left;
+}

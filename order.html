@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Pizza Delivery Service">
+        <title>PizzaDelivery</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <!--This is used to display the header and navigation bar for the website.-->
+    <header class="site-header">
+        <a class="logo" href="index.html">PizzaDelivery</a>
+        <nav>
+            <ul>
+                <li id="home_link"><a href="index.html">Home</a></li>
+                <li id="order_link"><a href="order.html">Order</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+        <header>
+            <h1 class="headline">Menu</h1>
+        </header>
+        
+        <!-- Menu filters -->
+        <div class="filters">
+            <label for="category-select">Category:</label>
+            <select id="category-select">
+                <option value="pizza">Pizzas</option>
+                <option value="side">Sides</option>
+                <option value="drink">Drinks</option>
+                </select>
+            </div>
+
+        <div class="filters">
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select">
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+                <option value="calories-asc">Calories: low to high</option>
+                <option value="calories-desc">Calories: high to low</option>
+                <option value="name">Name (A–Z)</option>
+            </select>
+        </div>
+
+        <!-- Product cards will be dynamically generated here -->
+            <section>
+                <ul class="product-list" id="product-list"></ul>
+            </section>
+
+        <!-- Cart elements -->
+         <aside class="cart">
+            <h2 class="headline">Cart</h2>
+            <!-- Products will be dynamically added here -->
+             <ul class="cart-items" id="cart-items"></ul>
+             <p>Total: <span id="cart-total">£0.00</span></p>
+             <button class="checkout-button" id="checkout-button">Checkout</button>
+        </aside>
+
+        <!-- Checkout modal -->
+        <dialog id="checkout-modal" class="modal">
+            <form id="checkout-form">
+                <h2>Delivery details</h2>
+
+                <label for="full-name">Full name</label>
+                <input type="text" id="full-name" required>
+
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" required
+                       inputmode="numeric"
+                       pattern="[0-9]{10,11}"
+                       maxlength="11"
+                       title="Enter 10 or 11 digits, numbers only (e.g. 07123456789)">
+
+                <label for="address">Address</label>
+                <textarea id="address" rows="3" required></textarea>
+
+                <p class="modal-total">Total: <span id="modal-total">£0.00</span></p>
+
+                <div class="modal-buttons">
+                    <button type="button" id="cancel-button">Cancel</button>
+                    <button type="submit">Continue</button>
+                </div>
+            </form>
+
+           <!-- Review screen: products and customer details (hidden until the form is submitted) -->
+            <div id="confirmation" hidden>
+                <h2>Review your order</h2>
+
+                <!-- Products: filled by JavaScript -->
+                <ul id="confirm-items" class="summary-list"></ul>
+                <p class="summary-total">Total <strong id="confirm-total">£0.00</strong></p>
+
+                <hr>
+
+                <!-- Customer details: the values are filled by JavaScript -->
+                <ul class="summary-list">
+                    <li><span>Full name</span><strong id="confirm-name"></strong></li>
+                    <li><span>Address</span><strong id="confirm-address"></strong></li>
+                    <li><span>Phone</span><strong id="confirm-phone"></strong></li>
+                </ul>
+
+                <div class="modal-buttons">
+                    <button type="button" id="back-button" class="back-button">Back</button>
+                    <button type="button" id="confirm-button" class="confirm-button">Confirm</button>
+                </div>
+            </div>
+
+            <!-- Thank-you screen (hidden until the order is confirmed) -->
+            <div id="thank-you" hidden>
+                <h2>Thank you, <span id="thank-you-name"></span>!</h2>
+                <p>Your order is on its way.</p>
+
+                <div class="modal-buttons">
+                    <button type="button" id="close-button" class="confirm-button">Close</button>
+                </div>
+            </div>
+        </dialog>
+
+        <!--This is used to display the footer of the website.-->
+                <footer class="footer">
+                    <p>&copy; 2026 PizzaDelivery. All rights reserved.</p>
+                </footer>
+
+    <!--This connects to the JavaScript file.-->
+    <script src="script.js"></script>
+    </body>
+</html>
