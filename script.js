@@ -1,457 +1,185 @@
-// Array to store the products
-// Get reference to the product list container. In a real project this information must be provided by a database or an API. For this example, we will contained in an array of product information.
+// Script for the whole site, loaded by every page.
+// Part 1 builds the header and footer that all pages share.
+// Part 2 runs only on the Order page.
 
-let products =
-[
-  // Category: Pizzas
-  {
-    id: 1,
-    name: "Margherita",
-    description: "Classic pizza with tomato sauce, mozzarella and basil.",
-    price: 10,
-    category: "pizza",
-    image: "assets/images/margherita.jpg",
-    calories: 850
-  },
-  {
-    id: 2,
-    name: "Pepperoni",
-    description: "Mozzarella cheese topped with spicy pepperoni.",
-    price: 12,
-    category: "pizza",
-    image: "assets/images/pepperoni.jpg",
-    calories: 1050
-  },
-  {
-    id: 3,
-    name: "BBQ Chicken",
-    description: "Grilled chicken, BBQ sauce, red onions and mozzarella.",
-    price: 14,
-    category: "pizza",
-    image: "assets/images/bbq-chicken.jpg",
-    calories: 1100
-  },
-  {
-    id: 4,
-    name: "Hawaiian",
-    description: "Ham, pineapple, mozzarella and tomato sauce.",
-    price: 12,
-    category: "pizza",
-    image: "assets/images/hawaiian.jpg",
-    calories: 980
-  },
-  {
-    id: 5,
-    name: "Four Cheese",
-    description: "Mozzarella, cheddar, parmesan and blue cheese.",
-    price: 14,
-    category: "pizza",
-    image: "assets/images/four-cheese.jpg",
-    calories: 1200
-  },
-  {
-    id: 6,
-    name: "Veggie Supreme",
-    description: "Bell peppers, mushrooms, onions, olives and sweetcorn.",
-    price: 12,
-    category: "pizza",
-    image: "assets/images/veggie-supreme.jpg",
-    calories: 900
-  },
-  {
-    id: 7,
-    name: "Meat Feast",
-    description: "Pepperoni, sausage, bacon and ham.",
-    price: 16,
-    category: "pizza",
-    image: "assets/images/meat-feast.jpg",
-    calories: 1350
-  },
-  {
-    id: 8,
-    name: "Spicy Diablo",
-    description: "Spicy salami, jalapeños, chilli flakes and mozzarella.",
-    price: 14,
-    category: "pizza",
-    image: "assets/images/spicy-diablo.jpg",
-    calories: 1150
-  },
-  {
-    id: 9,
-    name: "Chicken Pesto",
-    description: "Grilled chicken, basil pesto, mozzarella and tomatoes.",
-    price: 14,
-    category: "pizza",
-    image: "assets/images/chicken-pesto.jpg",
-    calories: 1080
-  },
-  {
-    id: 10,
-    name: "Mushroom Truffle",
-    description: "Mushrooms, truffle oil, mozzarella and parmesan.",
-    price: 15,
-    category: "pizza",
-    image: "assets/images/mushroom-truffle.jpg",
-    calories: 1020
-  },
-  {
-    id: 11,
-    name: "Mediterranean",
-    description: "Feta cheese, olives, spinach and sun-dried tomatoes.",
-    price: 13,
-    category: "pizza",
-    image: "assets/images/mediterranean.jpg",
-    calories: 950
-  },
-  {
-    id: 12,
-    name: "Buffalo Chicken",
-    description: "Buffalo chicken, mozzarella and ranch drizzle.",
-    price: 15,
-    category: "pizza",
-    image: "assets/images/buffalo-chicken.jpg",
-    calories: 1180
-  },
-  {
-    id: 13,
-    name: "Classic Marinara",
-    description: "Tomato sauce, garlic, oregano and olive oil.",
-    price: 9,
-    category: "pizza",
-    image: "assets/images/marinara.jpg",
-    calories: 750
-  },
-  {
-    id: 14,
-    name: "Tuna Delight",
-    description: "Tuna, red onions, sweetcorn and mozzarella.",
-    price: 13,
-    category: "pizza",
-    image: "assets/images/tuna-delight.jpg",
-    calories: 990
-  },
-  {
-    id: 15,
-    name: "Prosciutto Rocket",
-    description: "Prosciutto, fresh rocket, parmesan and mozzarella.",
-    price: 16,
-    category: "pizza",
-    image: "assets/images/prosciutto-rocket.jpg",
-    calories: 1120
-  },
+// =========================================================
+// Part 1: shared header and footer (every page)
+// In a page, write <site-header></site-header> and <site-footer></site-footer>.
+// These are "custom elements": tags we define ourselves. Each one replaces
+// itself with the real <header> or <footer>, styled by base.css.
+// =========================================================
 
- // Category: Sides
-
-  {
-    id: 16,
-    name: "Garlic Bread",
-    description: "Oven-baked bread with garlic butter.",
-    price: 4,
-    category: "side",
-    image: "assets/images/garlic-bread.jpg",
-    calories: 350
-  },
-  {
-    id: 17,
-    name: "Cheesy Garlic Bread",
-    description: "Garlic bread topped with melted mozzarella.",
-    price: 5,
-    category: "side",
-    image: "assets/images/cheesy-garlic-bread.jpg",
-    calories: 480
-  },
-  {
-    id: 18,
-    name: "Chicken Wings",
-    description: "Six crispy chicken wings with your choice of sauce.",
-    price: 7,
-    category: "side",
-    image: "assets/images/chicken-wings.jpg",
-    calories: 650
-  },
-  {
-    id: 19,
-    name: "Potato Wedges",
-    description: "Seasoned potato wedges served with a dipping sauce.",
-    price: 5,
-    category: "side",
-    image: "assets/images/potato-wedges.jpg",
-    calories: 420
-  },
-  {
-    id: 20,
-    name: "Mozzarella Sticks",
-    description: "Breaded mozzarella sticks served with marinara sauce.",
-    price: 6,
-    category: "side",
-    image: "assets/images/mozzarella-sticks.jpg",
-    calories: 520
-  },
-  {
-    id: 21,
-    name: "Onion Rings",
-    description: "Crispy battered onion rings.",
-    price: 4,
-    category: "side",
-    image: "assets/images/onion-rings.jpg",
-    calories: 390
-  },
-  {
-    id: 22,
-    name: "Caesar Salad",
-    description: "Romaine lettuce, croutons, parmesan and Caesar dressing.",
-    price: 6,
-    category: "side",
-    image: "assets/images/caesar-salad.jpg",
-    calories: 320
-  },
-  {
-    id: 23,
-    name: "Greek Salad",
-    description: "Tomatoes, cucumbers, olives, feta and red onions.",
-    price: 6,
-    category: "side",
-    image: "assets/images/greek-salad.jpg",
-    calories: 280
-  },
-  {
-    id: 24,
-    name: "Loaded Fries",
-    description: "French fries topped with cheddar, bacon and spring onions.",
-    price: 7,
-    category: "side",
-    image: "assets/images/loaded-fries.jpg",
-    calories: 690
-  },
-  {
-    id: 25,
-    name: "Classic Fries",
-    description: "Golden crispy French fries with sea salt.",
-    price: 4,
-    category: "side",
-    image: "assets/images/classic-fries.jpg",
-    calories: 370
-  },
-  {
-    id: 26,
-    name: "Coleslaw",
-    description: "Shredded cabbage and carrots in creamy dressing.",
-    price: 3,
-    category: "side",
-    image: "assets/images/coleslaw.jpg",
-    calories: 220
-  },
-  {
-    id: 27,
-    name: "Jalapeño Poppers",
-    description: "Jalapeños stuffed with cream cheese and fried.",
-    price: 6,
-    category: "side",
-    image: "assets/images/jalapeno-poppers.jpg",
-    calories: 460
-  },
-  {
-    id: 28,
-    name: "Chicken Nuggets",
-    description: "Eight crispy chicken nuggets with dipping sauce.",
-    price: 6,
-    category: "side",
-    image: "assets/images/chicken-nuggets.jpg",
-    calories: 540
-  },
-  {
-    id: 29,
-    name: "Mac and Cheese",
-    description: "Creamy macaroni with cheddar cheese sauce.",
-    price: 7,
-    category: "side",
-    image: "assets/images/mac-and-cheese.jpg",
-    calories: 610
-  },
-  {
-    id: 30,
-    name: "Garlic Dough Balls",
-    description: "Soft pizza dough balls brushed with garlic butter.",
-    price: 5,
-    category: "side",
-    image: "assets/images/garlic-dough-balls.jpg",
-    calories: 440
-  },
-
- // Category: Drinks
-
-  {
-    id: 31,
-    name: "Coca-Cola",
-    description: "Classic Coca-Cola, 330ml can.",
-    price: 2,
-    category: "drink",
-    image: "assets/images/coca-cola.jpg",
-    calories: 139
-  },
-  {
-    id: 32,
-    name: "Diet Coke",
-    description: "Sugar-free Diet Coke, 330ml can.",
-    price: 2,
-    category: "drink",
-    image: "assets/images/diet-coke.jpg",
-    calories: 1
-  },
-  {
-    id: 33,
-    name: "Sprite",
-    description: "Refreshing lemon-lime sparkling drink, 330ml.",
-    price: 2,
-    category: "drink",
-    image: "assets/images/sprite.jpg",
-    calories: 63
-  },
-  {
-    id: 34,
-    name: "Fanta Orange",
-    description: "Sparkling orange-flavoured soft drink, 330ml.",
-    price: 2,
-    category: "drink",
-    image: "assets/images/fanta-orange.jpg",
-    calories: 63
-  },
-  {
-    id: 35,
-    name: "Still Water",
-    description: "Refreshing still mineral water, 500ml.",
-    price: 2,
-    category: "drink",
-    image: "assets/images/still-water.jpg",
-    calories: 0
-  },
-  {
-    id: 36,
-    name: "Sparkling Water",
-    description: "Carbonated mineral water, 500ml.",
-    price: 2,
-    category: "drink",
-    image: "assets/images/sparkling-water.jpg",
-    calories: 0
-  },
-  {
-    id: 37,
-    name: "Lemon Iced Tea",
-    description: "Chilled black tea with lemon flavour.",
-    price: 3,
-    category: "drink",
-    image: "assets/images/lemon-iced-tea.jpg",
-    calories: 90
-  },
-  {
-    id: 38,
-    name: "Peach Iced Tea",
-    description: "Refreshing iced tea with peach flavour.",
-    price: 3,
-    category: "drink",
-    image: "assets/images/peach-iced-tea.jpg",
-    calories: 95
-  },
-  {
-    id: 39,
-    name: "Orange Juice",
-    description: "Freshly squeezed orange juice, 250ml.",
-    price: 3,
-    category: "drink",
-    image: "assets/images/orange-juice.jpg",
-    calories: 110
-  },
-  {
-    id: 40,
-    name: "Apple Juice",
-    description: "Refreshing apple juice, 250ml.",
-    price: 3,
-    category: "drink",
-    image: "assets/images/apple-juice.jpg",
-    calories: 115
-  },
-  {
-    id: 41,
-    name: "Strawberry Milkshake",
-    description: "Creamy milkshake blended with strawberries.",
-    price: 5,
-    category: "drink",
-    image: "assets/images/strawberry-milkshake.jpg",
-    calories: 380
-  },
-  {
-    id: 42,
-    name: "Chocolate Milkshake",
-    description: "Rich chocolate ice cream blended with milk.",
-    price: 5,
-    category: "drink",
-    image: "assets/images/chocolate-milkshake.jpg",
-    calories: 420
-  },
-  {
-    id: 43,
-    name: "Vanilla Milkshake",
-    description: "Classic vanilla ice cream blended with milk.",
-    price: 5,
-    category: "drink",
-    image: "assets/images/vanilla-milkshake.jpg",
-    calories: 390
-  },
-  {
-    id: 44,
-    name: "Lemonade",
-    description: "Refreshing sparkling lemonade.",
-    price: 3,
-    category: "drink",
-    image: "assets/images/lemonade.jpg",
-    calories: 120
-  },
-  {
-    id: 45,
-    name: "Mango Smoothie",
-    description: "Smooth tropical mango blended with fruit juice.",
-    price: 5,
-    category: "drink",
-    image: "assets/images/mango-smoothie.jpg",
-    calories: 240
-  }
+// The links in the navigation. To add a page, add one line here.
+const navigationLinks = [
+  { text: "Home", href: "index.html" },
+  { text: "Order", href: "order.html" },
+  { text: "Contact", href: "contact.html" }
 ];
 
+//Find the file name of the page you are on
+//input: none (reads the current address)
+//output: text, e.g. "order.html" (the homepage can also be just "/")
+function getCurrentPage() {
+  return location.pathname.split("/").pop() || "index.html";
+}
+
+//Create an element with a class and some text
+//input: tag (e.g. "a"), className (text, can be empty), text (text, can be empty)
+//output: the new element
+function createElementWith(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) {
+    element.className = className;
+  }
+  if (text) {
+    element.textContent = text;
+  }
+  return element;
+}
+
+// <site-header>: logo and navigation
+class SiteHeader extends HTMLElement {
+  connectedCallback() {
+    const header = createElementWith("header", "site-header");
+
+    const logo = createElementWith("a", "logo", "PizzaDelivery");
+    logo.href = "index.html";
+
+    const nav = document.createElement("nav");
+    const list = createElementWith("ul", "nav-list");
+
+    for (let link of navigationLinks) {
+      const item = document.createElement("li");
+      const anchor = createElementWith("a", "", link.text);
+      anchor.href = link.href;
+
+      // Mark the page you are on, so it shows as the white pill
+      if (link.href === getCurrentPage()) {
+        anchor.setAttribute("aria-current", "page");
+      }
+
+      item.appendChild(anchor);
+      list.appendChild(item);
+    }
+
+    nav.appendChild(list);
+    header.append(logo, nav);
+    this.replaceWith(header);
+  }
+}
+
+// <site-footer>: copyright line
+class SiteFooter extends HTMLElement {
+  connectedCallback() {
+    const footer = createElementWith("footer", "site-footer");
+    const year = new Date().getFullYear(); // updates itself every new year
+    footer.appendChild(createElementWith("p", "", `© ${year} PizzaDelivery. All rights reserved.`));
+    this.replaceWith(footer);
+  }
+}
+
+// Register the new tags (custom element names must contain a hyphen)
+customElements.define("site-header", SiteHeader);
+customElements.define("site-footer", SiteFooter);
+
+// =========================================================
+// Part 2: Order page
+// The list of products ("products") comes from database.js, which order.html loads before this file.
+// On the other pages these elements don't exist, so the variables are simply null.
+// =========================================================
+
+// Get references to the product list and the dropdowns
 const productList = document.getElementById("product-list");
-// Get references to the category and sort dropdowns
 const categorySelect = document.getElementById("category-select");
 const sortSelect = document.getElementById("sort-select");
 // Get references to the cart elements and the total
 const cartItems = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
-// Get references to the modal form elements
+// Get references to the modal elements
 const checkoutButton = document.getElementById("checkout-button");
 const checkoutModal = document.getElementById("checkout-modal");
-const modalTotal = document.getElementById("modal-total");
 const cancelButton = document.getElementById("cancel-button");
 // Checkout form and its fields
 const checkoutForm = document.getElementById("checkout-form");
 const fullNameInput = document.getElementById("full-name");
 const phoneInput = document.getElementById("phone");
 const addressInput = document.getElementById("address");
-// Get references to the modal confirmation elements
+// Get references to the review and thank-you screens
 const confirmation = document.getElementById("confirmation");
 const confirmName = document.getElementById("confirm-name");
 const confirmPhone = document.getElementById("confirm-phone");
 const confirmAddress = document.getElementById("confirm-address");
 const confirmItems = document.getElementById("confirm-items");
 const confirmTotal = document.getElementById("confirm-total");
-const closeButton = document.getElementById("close-button");
 const backButton = document.getElementById("back-button");
 const confirmButton = document.getElementById("confirm-button");
+const closeButton = document.getElementById("close-button");
 const thankYou = document.getElementById("thank-you");
 const thankYouName = document.getElementById("thank-you-name");
+// Templates in order.html for the repeated items
+const productCardTemplate = document.getElementById("product-card-template");
+const cartItemTemplate = document.getElementById("cart-item-template");
+const summaryItemTemplate = document.getElementById("summary-item-template");
 
 // Array to store the products added to the cart
 let cart = [];
 
+//Format a number as a price in pounds
+//input: amount (number), e.g. 12
+//output: text, e.g. "£12.00"
+function formatPrice(amount) {
+  return `£${amount.toFixed(2)}`;
+}
+
+//Find how many units of a product are in the cart
+//input: productId (number)
+//output: the quantity (number), 0 if the product is not in the cart
+function getQuantity(productId) {
+  const cartItem = cart.find(item => item.id === productId);
+  return cartItem ? cartItem.quantity : 0;
+}
+
+//Make a copy of a <template> from order.html
+//input: template (a <template> element)
+//output: the copied element, ready to fill in and add to the page
+function copyTemplate(template) {
+  return template.content.firstElementChild.cloneNode(true);
+}
+
+//Build one product card from the template
+//input: product (object from database.js)
+//output: the finished <li class="product-card"> element
+function createProductCard(product) {
+  const card = copyTemplate(productCardTemplate);
+  // Remember which product this card shows, so updateSteppers() can find it
+  card.dataset.productId = product.id;
+
+  // Fill in the text and the photo
+  card.querySelector(".product-name").textContent = product.name;
+  card.querySelector(".product-description").textContent = product.description;
+  card.querySelector(".product-calories").textContent = `Calories: ${product.calories}`;
+  card.querySelector(".product-price").textContent = formatPrice(product.price);
+
+  const image = card.querySelector(".product-image");
+  image.src = product.image;
+  image.alt = product.name;
+
+  // Connect the stepper buttons and name them for screen readers
+  const minusButton = card.querySelector(".stepper-minus");
+  const plusButton = card.querySelector(".stepper-plus");
+  minusButton.setAttribute("aria-label", `Remove one ${product.name}`);
+  plusButton.setAttribute("aria-label", `Add one ${product.name}`);
+  minusButton.addEventListener("click", () => removeOneFromCart(product.id));
+  plusButton.addEventListener("click", () => addToCart(product));
+
+  return card;
+}
+
+//Show the products of one category, sorted
+//input: category (text, e.g. "pizza"), sortBy (text, e.g. "price-asc")
+//output: none (fills the product list on the page)
 function displayProducts(category, sortBy) {
-  productList.innerHTML = ""; // Clear previous list
+  productList.replaceChildren(); // Clear previous list
 
   // Make a copy so the original products array keeps its order
   let sortedProducts = [...products];
@@ -469,45 +197,20 @@ function displayProducts(category, sortBy) {
     sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  for (let index = 0; index < sortedProducts.length; index++) {
-
-    let product = sortedProducts[index];
-
+  for (let product of sortedProducts) {
     // Skip products from other categories (unless "all" is selected)
     if (category !== "all" && product.category !== category) {
       continue;
     }
 
-    const li = document.createElement("li");
-    li.classList.add("product-card");
-    // Since there are different elements to be displayed for each product, we use a template literal
-    // to build the HTML structure of each card: image, name, description, price and calories.
-    li.innerHTML = `
-      <img src="${product.image}" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p class="description">${product.description}</p>
-      <p class="price">£${product.price.toFixed(2)}</p>
-      <p class="calories">${product.calories} kcal</p>
-    `;
-// Create the "Add to cart" button for this product
-    const button = document.createElement("button");
-    button.classList.add("add-to-cart");
-    button.textContent = "Add to cart";
-
-    button.addEventListener("click", () => {
-      addToCart(product);
-    });
-
-    li.appendChild(button);
-    productList.appendChild(li);
+    productList.appendChild(createProductCard(product));
   }
 
-  console.log("Category:", category, "| Sort:", sortBy, "| Cards:", productList.children.length);
+  updateSteppers(); // show the quantities already in the cart
 }
 
 function updateProducts() {
   displayProducts(categorySelect.value, sortSelect.value);
-  
 }
 
 // Add a product to the cart (or increase its quantity if it's already there)
@@ -528,8 +231,13 @@ function addToCart(product) {
   renderCart();
 }
 
-// Remove one unit of a product from the cart
-function removeFromCart(index) {
+// Remove one unit of a product from the cart (used by the − button on the cards)
+function removeOneFromCart(productId) {
+  const index = cart.findIndex(item => item.id === productId);
+  if (index === -1) {
+    return;
+  }
+
   if (cart[index].quantity > 1) {
     cart[index].quantity--;
   } else {
@@ -539,41 +247,57 @@ function removeFromCart(index) {
   renderCart();
 }
 
+// Remove a product completely from the cart (used by the × button in the cart)
+function removeAllFromCart(productId) {
+  cart = cart.filter(item => item.id !== productId);
+  renderCart();
+}
+
 //Compute the total price of all elements in the cart
-//input: cart (array of objects with price and quantity)
-//output: the total price of the cart (number)
-function sumCart(cart) {
+//input: items (array of objects with price and quantity)
+//output: the total price (number)
+function sumCart(items) {
   let sum = 0;
-  for (let item of cart) {
+  for (let item of items) {
     sum += item.price * item.quantity;
   }
   return sum;
 }
+
 // Display the cart items and the total
 function renderCart() {
-  cartItems.innerHTML = ""; // Clear previous list
+  cartItems.replaceChildren(); // Clear previous list
 
-  for (let index = 0; index < cart.length; index++) {
-    let item = cart[index];
-    let subtotal = item.price * item.quantity;
+  for (let item of cart) {
+    const row = copyTemplate(cartItemTemplate);
+    row.querySelector(".cart-item-text").textContent =
+      `${item.quantity} × ${item.name} – ${formatPrice(item.price * item.quantity)}`;
 
-    const li = document.createElement("li");
-    li.textContent = `${item.quantity} × ${item.name} – £${subtotal.toFixed(2)} `;
+    const removeButton = row.querySelector(".cart-item-remove");
+    removeButton.setAttribute("aria-label", `Remove ${item.name} from the basket`);
+    removeButton.addEventListener("click", () => removeAllFromCart(item.id));
 
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "−";
-    removeButton.addEventListener("click", () => {
-      removeFromCart(index);
-    });
-
-    li.appendChild(removeButton);
-    cartItems.appendChild(li);
+    cartItems.appendChild(row);
   }
 
-  cartTotal.textContent = `£${sumCart(cart).toFixed(2)}`;
+  cartTotal.textContent = formatPrice(sumCart(cart));
+  updateSteppers();
 }
 
-//Open the checkout form showing the cart total
+// Update the quantity shown on every product card to match the cart
+function updateSteppers() {
+  const cards = document.querySelectorAll(".product-card");
+
+  for (let card of cards) {
+    const quantity = getQuantity(Number(card.dataset.productId));
+
+    card.querySelector(".stepper-value").textContent = quantity;
+    // The − button can't go below zero
+    card.querySelector(".stepper-minus").disabled = quantity === 0;
+  }
+}
+
+//Open the checkout form
 //input: none (uses the cart array)
 //output: none (shows the modal on the page)
 function openCheckout() {
@@ -583,7 +307,6 @@ function openCheckout() {
     return;
   }
 
-  modalTotal.textContent = `£${sumCart(cart).toFixed(2)}`;
   checkoutModal.showModal();
 }
 
@@ -605,21 +328,14 @@ function showReview(event) {
   }
 
   // List of products: one row per item, name on the left and price on the right
-  confirmItems.innerHTML = ""; // Clear previous list
+  confirmItems.replaceChildren(); // Clear previous list
   for (let item of cart) {
-    const li = document.createElement("li");
-
-    const name = document.createElement("span");
-    name.textContent = `${item.quantity} × ${item.name}`;
-
-    const price = document.createElement("strong");
-    price.textContent = `£${(item.price * item.quantity).toFixed(2)}`;
-
-    li.appendChild(name);
-    li.appendChild(price);
-    confirmItems.appendChild(li);
+    const row = copyTemplate(summaryItemTemplate);
+    row.querySelector(".summary-item-name").textContent = `${item.quantity} × ${item.name}`;
+    row.querySelector(".summary-item-price").textContent = formatPrice(item.price * item.quantity);
+    confirmItems.appendChild(row);
   }
-  confirmTotal.textContent = `£${sumCart(cart).toFixed(2)}`;
+  confirmTotal.textContent = formatPrice(sumCart(cart));
 
   // List of customer details
   confirmName.textContent = fullName;
@@ -646,7 +362,7 @@ function placeOrder() {
   thankYouName.textContent = confirmName.textContent;
 
   // The order is placed, so empty the cart
-  cart = []; // empty the cart array
+  cart = [];
   renderCart(); // redraws the cart on the page
 
   // Switch screens: hide the review, show the thank-you message
@@ -664,15 +380,17 @@ function resetCheckout() {
   thankYou.hidden = true;
 }
 
+// Only the Order page has a product list, so only there do we connect the buttons
+if (productList) {
+  categorySelect.addEventListener("change", updateProducts);
+  sortSelect.addEventListener("change", updateProducts);
+  checkoutButton.addEventListener("click", openCheckout);
+  cancelButton.addEventListener("click", () => checkoutModal.close());
+  checkoutForm.addEventListener("submit", showReview);
+  backButton.addEventListener("click", backToForm);
+  confirmButton.addEventListener("click", placeOrder);
+  closeButton.addEventListener("click", () => checkoutModal.close());
+  checkoutModal.addEventListener("close", resetCheckout);
 
-categorySelect.addEventListener("change", updateProducts);
-sortSelect.addEventListener("change", updateProducts);
-checkoutButton.addEventListener("click", openCheckout);
-cancelButton.addEventListener("click", () => checkoutModal.close());
-checkoutForm.addEventListener("submit", showReview);
-backButton.addEventListener("click", backToForm);
-confirmButton.addEventListener("click", placeOrder);
-closeButton.addEventListener("click", () => checkoutModal.close());
-checkoutModal.addEventListener("close", resetCheckout);
-
-updateProducts(); // show products on page load
+  updateProducts(); // show products on page load
+}

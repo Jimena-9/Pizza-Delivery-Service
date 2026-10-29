@@ -1,83 +1,54 @@
-:root {
-    --color-background-default: #FFFFFF;
-    --color-background-brand-primary: #2C2C2C;
-    --color-background-brand-secondary: #F8F7F5;
-    --color-primary: #EA6A12;
-    --color-secondary: #F8F7F5;
-    --color-text-primary: #1E1E1E;
-    --color-text-secondary: #757575;
-    --color-text-tertiary: #B3B3B3;
+/* Homepage styles: loaded only on index.html, after base.css */
+/*Figma, 2026, Assessment - Pizza Delivery Service, https://www.figma.com/design/Oi7bHtK25JVwNCRG0CuH3C/Assessment---Pizza-Delivery-Service?node-id=319-18357&t=JVx0b7NmKpNbbagr-1, 23th Oct 2026,*/
 
-    
-    --font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --h6: 14px;
-    --h5: 16px;
-    --h4: 24px;
-    --h3: 32px;
-    --h2: 48px;
-    --h1: 72px;
-}
-/* Navigation */
-.site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: var(--color-background-default);
-    color: var(--color-secondary);
-}
-/* Homepage */
-.headline {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    font-family: var(--font-family);
-    font-size: var(--h1);
-}
-/* Order Page */
-.filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
 
-.product-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-/* Body */
 body {
-    margin:auto;
-    width: 80%;
+    background-color: var(--color-background-hero);
 }
 
-section {
-    width: 66%;
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 115px 20px 37px;
+    text-align: center;
 }
 
-aside {
-    width: 33%;
+.headline {
+    margin: 0;
+    font-size: var(--h1);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: var(--color-text-headline);
 }
 
-.first section {
-    float: left;
+.featured {
+    margin: 0;
+    font-size: var(--h3);
+    line-height: 1.2;
+    color: var(--color-text-subtitle);
 }
 
-.first aside {
-    float: right;
+.featured .accent {
+    color: var(--color-primary);
 }
 
-.second section {
-    float: right;
+.hero-image {
+display: block;
+    max-width: 100%;   /* shrink on screens narrower than the image, never grow */
+    height: auto;      /* keep the proportions when it shrinks */
+    margin: 0 auto;    /* centre it under the text */
 }
 
-.second aside {
-    float: left;
+/* Small screens */
+@media (max-width: 768px) {
+    .headline {
+        font-size: var(--h2);
+    }
+
+    .featured {
+        font-size: var(--h4);
+    }
 }

@@ -1,0 +1,482 @@
+/* Shared styles: loaded on every page, before the page's own stylesheet.
+Figma, 2026, Simple Design System, https://www.figma.com/community/file/1380235722331273046/simple-design-system, 23th Oct 2026,
+
+/* =========================================================
+   1. Variables
+   ========================================================= */
+:root {
+    /* Colours */
+    --color-background-default: #FFFFFF;
+    --color-background-brand-primary: #2C2C2C;
+    --color-background-brand-secondary: #F8F7F5;
+    --color-background-hero: #FEFAED;
+    --color-primary: #EA6A12;
+    --color-text-primary: #1E1E1E;
+    --color-text-secondary: #757575;
+    --color-text-tertiary: #B3B3B3;
+    --color-text-headline: #07143B;
+    --color-text-subtitle: #959895;
+    --color-text-on-primary: #F5F5F5;
+    --color-border: #D9D9D9;
+
+    /* State colours: mixed from the colours above, so there are no extra HEX values.
+       "hover" is a little darker, "active" (while pressed) is darker still. */
+    --color-primary-hover: color-mix(in srgb, var(--color-primary), var(--color-text-primary) 15%);
+    --color-primary-active: color-mix(in srgb, var(--color-primary), var(--color-text-primary) 30%);
+    --color-brand-primary-hover: color-mix(in srgb, var(--color-background-brand-primary), var(--color-text-headline) 50%);
+    --color-brand-primary-active: var(--color-text-headline);
+    --color-secondary-hover: var(--color-border);
+    --color-secondary-active: color-mix(in srgb, var(--color-border), var(--color-text-primary) 15%);
+    --color-on-primary-hover: color-mix(in srgb, var(--color-text-on-primary) 15%, transparent);
+    --color-on-primary-active: color-mix(in srgb, var(--color-text-on-primary) 30%, transparent);
+    --color-overlay: color-mix(in srgb, var(--color-text-primary) 20%, transparent);
+
+    /* Typography */
+    --font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-family-logo: "Outfit", var(--font-family);
+    --h6: 14px;
+    --h5: 16px;
+    --h4: 24px;
+    --h3: 32px;
+    --h2: 48px;
+    --h1: 72px;
+
+    /* Sizes */
+    --footer-height: 81px; /* the body leaves this much space at the bottom for the footer */
+
+    /* Shapes */
+    --radius: 8px;
+    --focus-ring: 2px solid var(--color-primary);
+}
+
+/* =========================================================
+   2. Base
+   ========================================================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding-bottom: var(--footer-height); /* space for the fixed footer, so it never covers content */
+    font-family: var(--font-family);
+    color: var(--color-text-primary);
+    background-color: var(--color-background-default);
+}
+
+img {
+    max-width: 100%;
+}
+
+/* =========================================================
+   3. Header and footer
+   ========================================================= */
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px;
+    background-color: var(--color-primary);
+}
+
+.logo {
+    font-family: var(--font-family-logo);
+    font-weight: 600;
+    font-size: var(--h4);
+    line-height: 40px;
+    color: var(--color-text-on-primary);
+    text-decoration: none;
+}
+
+.nav-list {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list a {
+    display: block;
+    padding: 8px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: var(--h5);
+    line-height: 1;
+    color: var(--color-text-on-primary);
+    text-decoration: none;
+}
+
+.nav-list a:hover {
+    background-color: var(--color-on-primary-hover);
+}
+
+.nav-list a:active {
+    background-color: var(--color-on-primary-active);
+}
+
+.nav-list a:focus-visible {
+    outline: 2px solid var(--color-text-on-primary);
+    outline-offset: 2px;
+}
+
+/* The link of the page you are on (set with aria-current="page" in the HTML) */
+.nav-list a[aria-current="page"] {
+    background-color: var(--color-text-on-primary);
+    color: var(--color-text-primary);
+}
+
+/* Footer fixed to the bottom of the window, always visible */
+.site-footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10; /* stays above the page content when scrolling */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--footer-height);
+    padding: 0 32px;
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-background-default);
+    text-align: center;
+    font-size: var(--h5);
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+/* =========================================================
+   4. Components: reusable on any page
+   ========================================================= */
+
+/* Page title with a divider line underneath */
+.page-title {
+    margin: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--h2);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-text-headline);
+}
+
+/* Page title without the divider line */
+.page-title--no-divider {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+/* Two-column layout on a grey panel: a wide main column and a narrower side column.
+   Used by the Order page (menu + basket) and the Contact page (form + details). */
+.page-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 735px) minmax(240px, 448px);
+    justify-content: space-between;
+    align-items: start;
+    gap: 64px;
+    margin: 32px;
+    padding: 32px 40px 64px 64px;
+    border-radius: 10px;
+    background-color: var(--color-background-brand-secondary);
+}
+
+/* White box with a border (<div class="card">) */
+.card {
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-background-default);
+}
+
+.card-title {
+    margin: 0;
+    font-size: var(--h4);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+/* Divider line (<hr class="divider">) */
+.divider {
+    width: 100%;
+    margin: 24px 0;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+/* Buttons
+   Use "button" plus one colour: button--primary, button--secondary or button--accent.
+   Add button--block to make it full width.
+   Example: <button class="button button--primary">Continue</button> */
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: var(--h5);
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.button:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.button--block {
+    width: 100%;
+}
+
+/* Dark button: the main action (Place order, Continue, Confirm) */
+.button--primary {
+    background-color: var(--color-background-brand-primary);
+    border-color: var(--color-background-brand-primary);
+    color: var(--color-text-on-primary);
+}
+
+.button--primary:hover:not(:disabled) {
+    background-color: var(--color-brand-primary-hover);
+    border-color: var(--color-brand-primary-hover);
+}
+
+.button--primary:active:not(:disabled) {
+    background-color: var(--color-brand-primary-active);
+    border-color: var(--color-brand-primary-active);
+}
+
+/* Light button: the other choice (Cancel, Back) */
+.button--secondary {
+    background-color: var(--color-background-brand-secondary);
+    border-color: var(--color-border);
+    color: var(--color-text-primary);
+}
+
+.button--secondary:hover:not(:disabled) {
+    background-color: var(--color-secondary-hover);
+}
+
+.button--secondary:active:not(:disabled) {
+    background-color: var(--color-secondary-active);
+    border-color: var(--color-secondary-active);
+}
+
+/* Orange button: calls to action on the brand colour (Order now) */
+.button--accent {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+}
+
+.button--accent:hover:not(:disabled) {
+    background-color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+}
+
+.button--accent:active:not(:disabled) {
+    background-color: var(--color-primary-active);
+    border-color: var(--color-primary-active);
+}
+
+/* Small button with only a symbol or icon (+, −, ×)
+   Always give it an aria-label so screen readers can name it. */
+.icon-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 24px;
+    min-height: 24px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    font-family: inherit;
+    font-size: var(--h5);
+    line-height: 1;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: color 0.15s;
+}
+
+.icon-button:hover:not(:disabled) {
+    color: var(--color-primary);
+}
+
+.icon-button:active:not(:disabled) {
+    color: var(--color-primary-active);
+}
+
+.icon-button:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.icon-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* Dropdown (<select class="select">) */
+.select {
+    appearance: none;
+    min-width: 120px;
+    height: 40px;
+    padding: 0 36px 0 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-background-default) url("images/icons/chevron-down.svg") no-repeat right 12px center;
+    font-family: inherit;
+    font-size: var(--h5);
+    color: var(--color-text-primary);
+    cursor: pointer;
+}
+
+/* Forms (<form class="form">): labels above full-width fields */
+.form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: var(--h5);
+}
+
+.form input,
+.form textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-background-default);
+    font-family: inherit;
+    font-size: var(--h5);
+    line-height: 1;
+    color: var(--color-text-primary);
+}
+
+.form input {
+    height: 42px;
+}
+
+.form textarea {
+    min-height: 80px;
+    line-height: 1.4;
+    resize: vertical;
+}
+
+.form ::placeholder {
+    color: var(--color-text-tertiary);
+}
+
+/* Field states, shared by dropdowns and form fields */
+.select:hover,
+.form input:hover,
+.form textarea:hover {
+    border-color: var(--color-text-tertiary);
+}
+
+.select:focus-visible,
+.form input:focus-visible,
+.form textarea:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* Modal (<dialog class="modal">) */
+.modal {
+    width: 560px;
+    max-width: calc(100% - 32px);
+    max-height: calc(100vh - 32px);
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-background-default);
+    color: var(--color-text-primary);
+    overflow-y: auto;
+}
+
+.modal::backdrop {
+    background-color: var(--color-overlay);
+}
+
+.modal-title {
+    margin: 0 0 24px;
+    font-size: var(--h4);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Row of buttons at the bottom of a modal: they share the width equally */
+.modal-buttons {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.modal-buttons .button {
+    flex: 1;
+}
+
+/* =========================================================
+   Smaller screens
+   ========================================================= */
+
+/* Medium screens: the two columns stack */
+@media (max-width: 1024px) {
+    .page-columns {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+        padding: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* A shorter footer, so it takes less of a small screen */
+    :root {
+        --footer-height: 52px;
+    }
+
+    .site-footer {
+        padding: 0 16px;
+        font-size: var(--h6);
+    }
+
+    .page-columns {
+        margin: 16px;
+        padding: 20px 16px;
+    }
+
+    .site-header {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 16px;
+    }
+
+    .page-title {
+        font-size: var(--h3);
+    }
+}
+
+@media (max-width: 480px) {
+    .modal {
+        padding: 20px;
+    }
+
+    .modal-buttons {
+        gap: 12px;
+    }
+}

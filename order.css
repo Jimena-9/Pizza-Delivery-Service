@@ -1,0 +1,266 @@
+/* Order page styles: loaded only on order.html, after base.css.
+   Buttons, dropdowns, form fields and the modal come from base.css. */
+
+/* Left column (the two-column layout itself is .page-columns in base.css) */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+}
+
+.filters label {
+    font-weight: 600;
+    font-size: var(--h6);
+}
+
+/* Product cards (built by displayProducts() in script.js) */
+.product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.product-card {
+    display: flex;
+    min-height: 110px;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: var(--color-background-default);
+}
+
+/* Left area: product details and controls */
+.product-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px;
+}
+
+/* Product name, description and calories */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.product-name {
+    margin: 0;
+    font-size: var(--h5);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.product-description,
+.product-calories {
+    margin: 0;
+    font-size: var(--h6);
+    line-height: 1.4;
+}
+
+.product-calories {
+    font-weight: 600;
+}
+
+/* Price above the quantity stepper */
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-shrink: 0;
+    gap: 8px;
+}
+
+.product-price {
+    margin: 0;
+    font-size: var(--h5);
+    font-weight: 600;
+}
+
+/* Product photograph */
+.product-image {
+    flex: 0 0 110px;
+    width: 110px;
+    object-fit: cover;
+}
+
+/* Quantity stepper: − and + are .icon-button (see base.css) */
+.stepper {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-background-default);
+}
+
+.stepper-value {
+    min-width: 25px;
+    text-align: center;
+}
+
+/* Cart (right column): the white box comes from .card in base.css */
+.cart {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 78px; /* lines the card up with the filters row */
+    padding: 32px;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: var(--color-text-secondary);
+}
+
+/* Shown when the cart has no products yet */
+.cart-items:empty::before {
+    content: "Your basket is empty";
+    color: var(--color-text-tertiary);
+}
+
+/* One product in the cart: text on the left, remove button on the right */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.cart-item .icon-button {
+    font-size: var(--h4);
+}
+
+.cart-total {
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-text-secondary);
+}
+
+/* Order review (inside the checkout modal) */
+.summary-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.summary-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    font-size: var(--h5);
+    line-height: 1.5;
+}
+
+.summary-list strong {
+    font-weight: 600;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.summary-total {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0;
+    font-size: var(--h5);
+}
+
+/* Large screens: only the product cards scroll.
+   The page is exactly as tall as the window, so the header, title, filters,
+   basket and footer stay in place, and the product list scrolls inside the
+   space that is left between the filters and the footer. */
+@media (min-width: 1025px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;  /* fallback for older browsers */
+        height: 100dvh; /* window height, also correct on mobile browsers */
+        overflow: hidden;
+    }
+
+    /* The grey panel fills the space between the header and the footer */
+    .page-columns {
+        flex: 1;
+        min-height: 0;
+        grid-template-rows: minmax(0, 1fr);
+        padding-bottom: 32px;
+    }
+
+    /* The left column is as tall as the panel... */
+    .menu {
+        min-height: 0;
+        height: 100%;
+    }
+
+    /* ...and the product list takes what's left after the title and filters */
+    .product-list {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        scrollbar-gutter: stable; /* space for the scrollbar, so the cards don't shift */
+    }
+
+    /* A long basket scrolls its own items instead of growing past the panel */
+    .cart {
+        max-height: calc(100% - 78px); /* 78px = the cart's margin-top */
+    }
+
+    .cart-items {
+        min-height: 0;
+        overflow-y: auto;
+    }
+}
+
+/* Medium screens: cart moves under the menu */
+@media (max-width: 1024px) {
+    .cart {
+        margin-top: 0;
+    }
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .filters {
+        justify-content: flex-start;
+    }
+
+    .product-info {
+        flex-wrap: wrap;
+        padding: 16px;
+    }
+
+    .product-actions {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+
+    .product-image {
+        flex-basis: 90px;
+        width: 90px;
+    }
+}

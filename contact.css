@@ -1,0 +1,72 @@
+/* Contact page styles: loaded only on contact.html, after base.css.
+   The two columns (.page-columns), white boxes (.card), form fields (.form)
+   and the Submit button (.button) all come from base.css. */
+
+/* Title sits above the grey panel */
+.contact-page .page-title {
+    margin: 20px 32px 0;
+}
+
+.contact-page .page-columns {
+    margin-top: 20px;
+    padding-top: 44px;
+    padding-bottom: 44px;
+}
+
+/* Submit button: fixed width instead of the full form width */
+.contact-form .button {
+    width: 100%;
+    max-width: 272px;
+}
+
+/* Contact information card */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-details {
+    font-style: normal; /* <address> is italic by default */
+    font-size: var(--h5);
+    line-height: 1.4;
+    color: var(--color-text-secondary);
+}
+
+.contact-details p {
+    margin: 0;
+}
+
+.contact-details a {
+    color: inherit;
+}
+
+.contact-details a:hover {
+    color: var(--color-primary);
+}
+
+.contact-details a:active {
+    color: var(--color-primary-active);
+}
+
+.contact-details a:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+    .contact-page .page-title {
+        margin: 16px 16px 0;
+    }
+
+    .contact-page .page-columns {
+        margin-top: 16px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .contact-form .button {
+        max-width: none;
+    }
+}

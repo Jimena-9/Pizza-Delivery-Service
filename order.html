@@ -4,126 +4,163 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Pizza Delivery Service">
-        <title>PizzaDelivery</title>
-        <link rel="stylesheet" href="style.css">
+        <title>Order - PizzaDelivery</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="base.css">
+        <link rel="stylesheet" href="order.css">
     </head>
-    <body>
-    <!--This is used to display the header and navigation bar for the website.-->
-    <header class="site-header">
-        <a class="logo" href="index.html">PizzaDelivery</a>
-        <nav>
-            <ul>
-                <li id="home_link"><a href="index.html">Home</a></li>
-                <li id="order_link"><a href="order.html">Order</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-        <header>
-            <h1 class="headline">Menu</h1>
-        </header>
-        
-        <!-- Menu filters -->
-        <div class="filters">
-            <label for="category-select">Category:</label>
-            <select id="category-select">
-                <option value="pizza">Pizzas</option>
-                <option value="side">Sides</option>
-                <option value="drink">Drinks</option>
+<body>
+    <!-- Shared header: built by script.js -->
+    <site-header></site-header>
+
+    <main class="page-columns">
+        <!-- Left column: the menu -->
+        <section class="menu">
+            <!-- Page title (its bottom border is the divider line) -->
+            <h1 class="page-title">Order</h1>
+
+            <!-- Menu filters: both dropdowns in one row -->
+            <div class="filters">
+                <label for="category-select">Category:</label>
+                <select class="select" id="category-select">
+                    <option value="pizza">Pizzas</option>
+                    <option value="side">Sides</option>
+                    <option value="drink">Drinks</option>
+                </select>
+
+                <label for="sort-select">Sort by:</label>
+                <select class="select" id="sort-select">
+                    <option value="price-asc">Price: low to high</option>
+                    <option value="price-desc">Price: high to low</option>
+                    <option value="calories-asc">Calories: low to high</option>
+                    <option value="calories-desc">Calories: high to low</option>
+                    <option value="name">Name (A–Z)</option>
                 </select>
             </div>
 
-        <div class="filters">
-            <label for="sort-select">Sort by:</label>
-            <select id="sort-select">
-                <option value="price-asc">Price: low to high</option>
-                <option value="price-desc">Price: high to low</option>
-                <option value="calories-asc">Calories: low to high</option>
-                <option value="calories-desc">Calories: high to low</option>
-                <option value="name">Name (A–Z)</option>
-            </select>
+            <!-- Product cards are created here by displayProducts() in script.js -->
+            <ul class="product-list" id="product-list"></ul>
+        </section>
+
+        <!-- Right column: the cart -->
+        <aside class="card cart">
+            <h2 class="card-title">Your basket</h2>
+            <!-- Cart items are created here by renderCart() in script.js -->
+            <ul class="cart-items" id="cart-items"></ul>
+            <p class="cart-total">Total: <span id="cart-total">£0.00</span></p>
+            <button type="button" class="button button--primary button--block" id="checkout-button">Place order</button>
+        </aside>
+    </main>
+
+    <!-- Checkout modal: three screens, only one is visible at a time -->
+    <dialog id="checkout-modal" class="modal">
+        <!-- Screen 1: delivery details form -->
+        <form id="checkout-form" class="form">
+            <h2 class="modal-title">Enter your details</h2>
+
+            <label for="full-name">Full name</label>
+            <input type="text" id="full-name" required>
+
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" required
+                   inputmode="numeric"
+                   pattern="[0-9]+"
+                   title="Numbers only (e.g. 07123456789)">
+
+            <label for="address">Address</label>
+            <textarea id="address" rows="3" required></textarea>
+
+            <div class="modal-buttons">
+                <button type="button" class="button button--secondary" id="cancel-button">Cancel</button>
+                <button type="submit" class="button button--primary">Continue</button>
+            </div>
+        </form>
+
+        <!-- Screen 2: review products and customer details (hidden until the form is submitted) -->
+        <div id="confirmation" hidden>
+            <h2 class="modal-title">Confirm your order</h2>
+
+            <!-- Products: filled by JavaScript -->
+            <ul id="confirm-items" class="summary-list"></ul>
+            <p class="summary-total">Total <strong id="confirm-total">£0.00</strong></p>
+
+            <hr class="divider">
+
+            <!-- Customer details: the values are filled by JavaScript -->
+            <ul class="summary-list">
+                <li><span>Full name</span><strong id="confirm-name"></strong></li>
+                <li><span>Address</span><strong id="confirm-address"></strong></li>
+                <li><span>Phone</span><strong id="confirm-phone"></strong></li>
+            </ul>
+
+            <div class="modal-buttons">
+                <button type="button" class="button button--secondary" id="back-button">Back</button>
+                <button type="button" class="button button--primary" id="confirm-button">Confirm</button>
+            </div>
         </div>
 
-        <!-- Product cards will be dynamically generated here -->
-            <section>
-                <ul class="product-list" id="product-list"></ul>
-            </section>
+        <!-- Screen 3: thank-you message (hidden until the order is confirmed) -->
+        <div id="thank-you" hidden>
+            <h2 class="modal-title">Thank you, <span id="thank-you-name"></span>!</h2>
+            <p>Your order is on its way.</p>
 
-        <!-- Cart elements -->
-         <aside class="cart">
-            <h2 class="headline">Cart</h2>
-            <!-- Products will be dynamically added here -->
-             <ul class="cart-items" id="cart-items"></ul>
-             <p>Total: <span id="cart-total">£0.00</span></p>
-             <button class="checkout-button" id="checkout-button">Checkout</button>
-        </aside>
+            <div class="modal-buttons">
+                <button type="button" class="button button--primary" id="close-button">Close</button>
+            </div>
+        </div>
+    </dialog>
 
-        <!-- Checkout modal -->
-        <dialog id="checkout-modal" class="modal">
-            <form id="checkout-form">
-                <h2>Delivery details</h2>
+    <!-- Templates: the HTML for repeated items. The browser doesn't show them;
+         script.js copies one for each product and fills in the text. -->
 
-                <label for="full-name">Full name</label>
-                <input type="text" id="full-name" required>
-
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" required
-                       inputmode="numeric"
-                       pattern="[0-9]{10,11}"
-                       maxlength="11"
-                       title="Enter 10 or 11 digits, numbers only (e.g. 07123456789)">
-
-                <label for="address">Address</label>
-                <textarea id="address" rows="3" required></textarea>
-
-                <p class="modal-total">Total: <span id="modal-total">£0.00</span></p>
-
-                <div class="modal-buttons">
-                    <button type="button" id="cancel-button">Cancel</button>
-                    <button type="submit">Continue</button>
+    <!-- One product card in the menu -->
+    <template id="product-card-template">
+        <li class="product-card">
+            <div class="product-info">
+                <div class="product-details">
+                    <h3 class="product-name"></h3>
+                    <p class="product-description"></p>
+                    <p class="product-calories"></p>
                 </div>
-            </form>
 
-           <!-- Review screen: products and customer details (hidden until the form is submitted) -->
-            <div id="confirmation" hidden>
-                <h2>Review your order</h2>
+                <div class="product-actions">
+                    <p class="product-price"></p>
 
-                <!-- Products: filled by JavaScript -->
-                <ul id="confirm-items" class="summary-list"></ul>
-                <p class="summary-total">Total <strong id="confirm-total">£0.00</strong></p>
-
-                <hr>
-
-                <!-- Customer details: the values are filled by JavaScript -->
-                <ul class="summary-list">
-                    <li><span>Full name</span><strong id="confirm-name"></strong></li>
-                    <li><span>Address</span><strong id="confirm-address"></strong></li>
-                    <li><span>Phone</span><strong id="confirm-phone"></strong></li>
-                </ul>
-
-                <div class="modal-buttons">
-                    <button type="button" id="back-button" class="back-button">Back</button>
-                    <button type="button" id="confirm-button" class="confirm-button">Confirm</button>
+                    <div class="stepper">
+                        <button type="button" class="icon-button stepper-minus">−</button>
+                        <span class="stepper-value">0</span>
+                        <button type="button" class="icon-button stepper-plus">+</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Thank-you screen (hidden until the order is confirmed) -->
-            <div id="thank-you" hidden>
-                <h2>Thank you, <span id="thank-you-name"></span>!</h2>
-                <p>Your order is on its way.</p>
+            <img class="product-image" src="" alt="">
+        </li>
+    </template>
 
-                <div class="modal-buttons">
-                    <button type="button" id="close-button" class="confirm-button">Close</button>
-                </div>
-            </div>
-        </dialog>
+    <!-- One product in the basket -->
+    <template id="cart-item-template">
+        <li class="cart-item">
+            <span class="cart-item-text"></span>
+            <button type="button" class="icon-button cart-item-remove">×</button>
+        </li>
+    </template>
 
-        <!--This is used to display the footer of the website.-->
-                <footer class="footer">
-                    <p>&copy; 2026 PizzaDelivery. All rights reserved.</p>
-                </footer>
+    <!-- One product on the review screen -->
+    <template id="summary-item-template">
+        <li>
+            <span class="summary-item-name"></span>
+            <strong class="summary-item-price"></strong>
+        </li>
+    </template>
 
-    <!--This connects to the JavaScript file.-->
+    <!-- Shared footer: built by script.js -->
+    <site-footer></site-footer>
+
+    <!--This connects to the JavaScript files.-->
+    <script src="database.js"></script>
     <script src="script.js"></script>
-    </body>
+</body>
 </html>
